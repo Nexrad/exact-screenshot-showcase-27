@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as AppDashboardRouteImport } from './routes/app/dashboard'
 import { Route as AppMt5RouteImport } from './routes/app/mt5'
+import { Route as AppPaymentRouteImport } from './routes/app/payment'
 import { Route as AppRiskRouteImport } from './routes/app/risk'
 import { Route as AppTradesRouteImport } from './routes/app/trades'
 
@@ -36,6 +37,11 @@ const AppMt5Route = AppMt5RouteImport.update({
   path: '/mt5',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppPaymentRoute = AppPaymentRouteImport.update({
+  id: '/payment',
+  path: '/payment',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const AppRiskRoute = AppRiskRouteImport.update({
   id: '/risk',
   path: '/risk',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteRouteWithChildren
   '/app/dashboard': typeof AppDashboardRoute
   '/app/mt5': typeof AppMt5Route
+  '/app/payment': typeof AppPaymentRoute
   '/app/risk': typeof AppRiskRoute
   '/app/trades': typeof AppTradesRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/app': typeof AppRouteRouteWithChildren
   '/app/dashboard': typeof AppDashboardRoute
   '/app/mt5': typeof AppMt5Route
+  '/app/payment': typeof AppPaymentRoute
   '/app/risk': typeof AppRiskRoute
   '/app/trades': typeof AppTradesRoute
 }
@@ -69,21 +77,36 @@ export interface FileRoutesById {
   '/app': typeof AppRouteRouteWithChildren
   '/app/dashboard': typeof AppDashboardRoute
   '/app/mt5': typeof AppMt5Route
+  '/app/payment': typeof AppPaymentRoute
   '/app/risk': typeof AppRiskRoute
   '/app/trades': typeof AppTradesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/app' | '/app/dashboard' | '/app/mt5' | '/app/risk' | '/app/trades'
+    | '/'
+    | '/app'
+    | '/app/dashboard'
+    | '/app/mt5'
+    | '/app/payment'
+    | '/app/risk'
+    | '/app/trades'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app' | '/app/dashboard' | '/app/mt5' | '/app/risk' | '/app/trades'
+  to:
+    | '/'
+    | '/app'
+    | '/app/dashboard'
+    | '/app/mt5'
+    | '/app/payment'
+    | '/app/risk'
+    | '/app/trades'
   id:
     | '__root__'
     | '/'
     | '/app'
     | '/app/dashboard'
     | '/app/mt5'
+    | '/app/payment'
     | '/app/risk'
     | '/app/trades'
   fileRoutesById: FileRoutesById
@@ -123,6 +146,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppMt5RouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/payment': {
+      id: '/app/payment'
+      path: '/payment'
+      fullPath: '/app/payment'
+      preLoaderRoute: typeof AppPaymentRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/app/risk': {
       id: '/app/risk'
       path: '/risk'
@@ -143,6 +173,7 @@ declare module '@tanstack/react-router' {
 interface AppRouteRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppMt5Route: typeof AppMt5Route
+  AppPaymentRoute: typeof AppPaymentRoute
   AppRiskRoute: typeof AppRiskRoute
   AppTradesRoute: typeof AppTradesRoute
 }
@@ -150,6 +181,7 @@ interface AppRouteRouteChildren {
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppMt5Route: AppMt5Route,
+  AppPaymentRoute: AppPaymentRoute,
   AppRiskRoute: AppRiskRoute,
   AppTradesRoute: AppTradesRoute,
 }
